@@ -1,5 +1,4 @@
 import type { Product } from "./products";
-import { products as staticProducts } from "./products";
 
 // ==================== Types ====================
 
@@ -77,108 +76,56 @@ export const statusEmoji: Record<OrderStatus, string> = {
 
 export const statusTimeline: OrderStatus[] = ["new", "confirmed", "preparing", "shipped", "delivered"];
 
-export const ADMIN_EMAIL = "admin@asrarlalla.ma";
-export const ADMIN_PASSWORD = "asrar2026";
 const AUTH_KEY = "asrar-admin-session";
-const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
-
-// ==================== Mock Data ====================
-
-const MOCK_ORDERS: Order[] = [
-  {
-    id: "1", ref: "AL-2026-0001",
-    customer: { fullName: "Fatima Zahra", phone: "+212661234567", city: "Casablanca", address: "Bd Mohammed V, Maârif" },
-    items: [
-      { productId: "rose-water", name: "Eau de Rose Distillée", price: 15, quantity: 2 },
-      { productId: "blush", name: "Blush Cloud Tint", price: 20, quantity: 1 },
-    ],
-    total: 50, status: "new", createdAt: "2026-05-30T10:30:00Z", updatedAt: "2026-05-30T10:30:00Z",
-  },
-  {
-    id: "2", ref: "AL-2026-0002",
-    customer: { fullName: "Nour El Houda", phone: "+212662345678", city: "Rabat", address: "Hay Riad, Rue 12" },
-    items: [
-      { productId: "tbrima", name: "Tbrima Glow Mask", price: 13, quantity: 1 },
-      { productId: "savon-beldi", name: "Savon Beldi Naturel", price: 5, quantity: 3 },
-      { productId: "gommage", name: "Gommage Éclat", price: 10, quantity: 1 },
-    ],
-    total: 38, status: "confirmed", createdAt: "2026-05-29T14:15:00Z", updatedAt: "2026-05-29T15:00:00Z",
-  },
-  {
-    id: "3", ref: "AL-2026-0003",
-    customer: { fullName: "Amina Belhaj", phone: "+212663456789", city: "Marrakech", address: "Guéliz, Av Hassan II", notes: "Appeler avant livraison" },
-    items: [
-      { productId: "rose-cream", name: "Crème de Rose Grand Format", price: 13, quantity: 2 },
-      { productId: "beauty-oil", name: "Huile de Beauté Naturelle", price: 10, quantity: 1 },
-    ],
-    total: 36, status: "shipped", createdAt: "2026-05-28T09:00:00Z", updatedAt: "2026-05-29T08:00:00Z",
-  },
-  {
-    id: "4", ref: "AL-2026-0004",
-    customer: { fullName: "Salma Bennani", phone: "+212664567890", city: "Fès", address: "Ville Nouvelle, Rue 8" },
-    items: [{ productId: "kohl", name: "Khôl Traditionnel", price: 5, quantity: 2 }],
-    total: 10, status: "delivered", createdAt: "2026-05-27T16:45:00Z", updatedAt: "2026-05-28T12:00:00Z",
-  },
-  {
-    id: "5", ref: "AL-2026-0005",
-    customer: { fullName: "Rania Chakir", phone: "+212665678901", city: "Tanger", address: "Av. des FAR, Apt 3" },
-    items: [
-      { productId: "lip-balm", name: "Baume à Lèvres Glowy", price: 5, quantity: 2 },
-      { productId: "rose-water", name: "Eau de Rose Distillée", price: 15, quantity: 1 },
-    ],
-    total: 25, status: "preparing", createdAt: "2026-05-30T08:00:00Z", updatedAt: "2026-05-30T09:00:00Z",
-  },
-  {
-    id: "6", ref: "AL-2026-0006",
-    customer: { fullName: "Khadija Moussaoui", phone: "+212666789012", city: "Agadir", address: "Quartier Talborjt" },
-    items: [
-      { productId: "savon-beldi", name: "Savon Beldi Naturel", price: 5, quantity: 2 },
-      { productId: "gommage", name: "Gommage Éclat", price: 10, quantity: 1 },
-      { productId: "beauty-oil", name: "Huile de Beauté Naturelle", price: 10, quantity: 1 },
-    ],
-    total: 30, status: "new", createdAt: "2026-05-31T07:00:00Z", updatedAt: "2026-05-31T07:00:00Z",
-  },
-];
-
-// ==================== Storage Helpers ====================
-
-function load<T>(key: string, fallback: T): T {
-  if (typeof window === "undefined") return fallback;
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : fallback;
-  } catch { return fallback; }
-}
-
-function save(key: string, data: unknown) {
-  if (typeof window === "undefined") return;
-  try { localStorage.setItem(key, JSON.stringify(data)); } catch {}
-}
+const SESSION_TIMEOUT = 30 * 60 * 1000;
 
 // ==================== Auth Service ====================
 
 export const authService = {
-  login(email: string, password: string): boolean {
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-      save(AUTH_KEY, { authenticated: true, loginAt: Date.now() });
-      return true;
-    }
-    return false;
-  },
-  isAuthenticated(): boolean {
-    const session = load<{ authenticated: boolean; loginAt: number } | null>(AUTH_KEY, null);
-    if (!session?.authenticated) return false;
-    if (Date.now() - session.loginAt > SESSION_TIMEOUT) {
-      this.logout();
+  async login(email: string, password: string): Promise<boolean> {
+    try {
+      const res = await fetch("/api/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      if (res.ok) {
+        if (typeof window !== "undefined") {
+          localStorage.setItem(AUTH_KEY, JSON.stringify({ authenticated: true, loginAt: Date.now() }));
+        }
+        return true;
+      }
+      return false;
+    } catch {
       return false;
     }
-    return true;
+  },
+  isAuthenticated(): boolean {
+    if (typeof window === "undefined") return false;
+    try {
+      const raw = localStorage.getItem(AUTH_KEY);
+      if (!raw) return false;
+      const session = JSON.parse(raw);
+      if (!session?.authenticated) return false;
+      if (Date.now() - session.loginAt > SESSION_TIMEOUT) {
+        this.logout();
+        return false;
+      }
+      return true;
+    } catch {
+      return false;
+    }
   },
   refreshSession() {
-    const session = load<{ authenticated: boolean; loginAt: number } | null>(AUTH_KEY, null);
-    if (session?.authenticated) {
-      save(AUTH_KEY, { ...session, loginAt: Date.now() });
-    }
+    if (typeof window === "undefined") return;
+    try {
+      const raw = localStorage.getItem(AUTH_KEY);
+      if (!raw) return;
+      const session = JSON.parse(raw);
+      if (session?.authenticated) {
+        localStorage.setItem(AUTH_KEY, JSON.stringify({ ...session, loginAt: Date.now() }));
+      }
+    } catch {}
   },
   logout() {
     if (typeof window !== "undefined") localStorage.removeItem(AUTH_KEY);
@@ -188,143 +135,120 @@ export const authService = {
 // ==================== Order Service ====================
 
 export const orderService = {
-  getAll(): Order[] {
-    return load("asrar-orders", MOCK_ORDERS);
+  async getAll(status?: string): Promise<Order[]> {
+    const params = status && status !== "all" ? `?status=${status}` : "";
+    const res = await fetch(`/api/orders${params}`);
+    if (!res.ok) return [];
+    return res.json();
   },
-  getById(id: string): Order | undefined {
-    return this.getAll().find((o) => o.id === id);
-  },
-  create(order: Omit<Order, "id" | "ref" | "createdAt" | "updatedAt" | "status">): Order {
-    const orders = this.getAll();
-    const maxNum = orders.reduce((max, o) => {
-      const n = parseInt(o.ref.split("-").pop() || "0");
-      return n > max ? n : max;
-    }, 0);
-    const now = new Date().toISOString();
-    const newOrder: Order = {
-      ...order,
-      id: String(Date.now()),
-      ref: `AL-2026-${String(maxNum + 1).padStart(4, "0")}`,
-      status: "new",
-      createdAt: now,
-      updatedAt: now,
-    };
-    orders.unshift(newOrder);
-    save("asrar-orders", orders);
-    return newOrder;
-  },
-  updateStatus(id: string, status: OrderStatus): Order | undefined {
-    const orders = this.getAll();
-    const idx = orders.findIndex((o) => o.id === id);
-    if (idx === -1) return undefined;
-    orders[idx] = { ...orders[idx], status, updatedAt: new Date().toISOString() };
-    save("asrar-orders", orders);
 
-    if (status === "confirmed") {
-      inventoryService.reduceStock(orders[idx].items);
-    }
-    return orders[idx];
+  async getById(id: string): Promise<Order | undefined> {
+    const orders = await this.getAll();
+    return orders.find((o) => o.id === id);
   },
-  bulkUpdateStatus(ids: string[], status: OrderStatus) {
-    const orders = this.getAll();
-    const now = new Date().toISOString();
-    const updated: Order[] = [];
-    ids.forEach((id) => {
-      const idx = orders.findIndex((o) => o.id === id);
-      if (idx !== -1) {
-        if (status === "confirmed" && orders[idx].status === "new") {
-          inventoryService.reduceStock(orders[idx].items);
-        }
-        orders[idx] = { ...orders[idx], status, updatedAt: now };
-        updated.push(orders[idx]);
-      }
+
+  async create(order: Omit<Order, "id" | "ref" | "createdAt" | "updatedAt" | "status">): Promise<Order> {
+    const res = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(order),
     });
-    save("asrar-orders", orders);
-    return updated;
+    return res.json();
   },
-  delete(id: string) {
-    const orders = this.getAll().filter((o) => o.id !== id);
-    save("asrar-orders", orders);
+
+  async updateStatus(id: string, status: OrderStatus): Promise<Order | undefined> {
+    const res = await fetch(`/api/orders/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    });
+    if (!res.ok) return undefined;
+    return res.json();
+  },
+
+  async bulkUpdateStatus(ids: string[], status: OrderStatus): Promise<void> {
+    await Promise.all(ids.map((id) => this.updateStatus(id, status)));
+  },
+
+  async delete(id: string): Promise<void> {
+    await fetch(`/api/orders/${id}`, { method: "DELETE" });
   },
 };
 
 // ==================== Inventory Service ====================
 
 export const inventoryService = {
-  getStockOverrides(): Record<string, number> {
-    return load("asrar-stock-overrides", {});
-  },
-  getStock(productId: string): number {
-    const overrides = this.getStockOverrides();
-    if (productId in overrides) return overrides[productId];
-    const p = staticProducts.find((p) => p.id === productId);
+  async getStock(productId: string): Promise<number> {
+    const res = await fetch("/api/products");
+    if (!res.ok) return 0;
+    const products: Product[] = await res.json();
+    const p = products.find((p) => p.id === productId);
     return p?.stock ?? 0;
   },
-  setStock(productId: string, stock: number) {
-    const overrides = this.getStockOverrides();
-    overrides[productId] = Math.max(0, stock);
-    save("asrar-stock-overrides", overrides);
-  },
-  reduceStock(items: { productId: string; quantity: number }[]) {
-    items.forEach((item) => {
-      const current = this.getStock(item.productId);
-      this.setStock(item.productId, current - item.quantity);
+
+  async setStock(productId: string, stock: number): Promise<void> {
+    await fetch(`/api/products/${productId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ stock: Math.max(0, stock) }),
     });
   },
-  isInStock(productId: string): boolean {
-    return this.getStock(productId) > 0;
+
+  async isInStock(productId: string): Promise<boolean> {
+    return (await this.getStock(productId)) > 0;
   },
-  isLowStock(productId: string): boolean {
-    return this.getStock(productId) <= 5 && this.getStock(productId) > 0;
+
+  async isLowStock(productId: string): Promise<boolean> {
+    const stock = await this.getStock(productId);
+    return stock <= 5 && stock > 0;
   },
 };
 
 // ==================== Product Service ====================
 
 export const productService = {
-  getOverrides(): Record<string, Partial<Product>> {
-    return load("asrar-products-overlay", {});
+  async getAllProducts(): Promise<Product[]> {
+    const res = await fetch("/api/products");
+    if (!res.ok) return [];
+    return res.json();
   },
-  getProduct(id: string): Product | undefined {
-    const base = staticProducts.find((p) => p.id === id);
-    if (!base) return undefined;
-    const overrides = this.getOverrides();
-    const stock = inventoryService.getStock(id);
-    return { ...base, ...overrides[id], stock };
+
+  async getProduct(id: string): Promise<Product | undefined> {
+    const products = await this.getAllProducts();
+    return products.find((p) => p.id === id);
   },
-  getAllProducts(): Product[] {
-    const overrides = this.getOverrides();
-    return staticProducts.map((p) => ({
-      ...p,
-      ...overrides[p.id],
-      stock: inventoryService.getStock(p.id),
-    }));
-  },
-  update(id: string, updates: Partial<Product>) {
-    const overrides = this.getOverrides();
-    overrides[id] = { ...overrides[id], ...updates };
-    if ("stock" in updates && updates.stock !== undefined) {
-      inventoryService.setStock(id, updates.stock);
-      delete overrides[id].stock;
-    }
-    save("asrar-products-overlay", overrides);
+
+  async update(id: string, updates: Partial<Product>): Promise<void> {
+    await fetch(`/api/products/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updates),
+    });
   },
 };
 
 // ==================== Settings Service ====================
 
 export const settingsService = {
-  get(): SiteSettings {
-    return load("asrar-settings", {
-      whatsappNumber: "212600000000",
+  async get(): Promise<SiteSettings> {
+    try {
+      const res = await fetch("/api/settings");
+      if (res.ok) return res.json();
+    } catch {}
+    return {
+      whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "212600000000",
       freeShippingThreshold: 99,
       promoBannerText: "🚚 Livraison offerte à partir de 99 DH · Paiement à la livraison 💵",
       promoBannerEnabled: true,
-    });
+    };
   },
-  update(settings: Partial<SiteSettings>) {
-    const current = this.get();
-    save("asrar-settings", { ...current, ...settings });
+
+  async update(settings: Partial<SiteSettings>): Promise<void> {
+    await fetch("/api/settings", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(settings),
+    });
   },
 };
 

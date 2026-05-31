@@ -27,11 +27,13 @@ const aboutLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
+const WA = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "212600000000";
+
 const socials = [
-  { emoji: "📸", label: "Instagram", href: "https://instagram.com" },
-  { emoji: "🎬", label: "TikTok", href: "https://tiktok.com" },
-  { emoji: "💬", label: "WhatsApp", href: "https://wa.me/" },
-  { emoji: "💙", label: "Facebook", href: "https://facebook.com" },
+  { emoji: "📸", label: "Instagram", href: "https://instagram.com/asrarlalla" },
+  { emoji: "🎬", label: "TikTok", href: "https://tiktok.com/@asrarlalla" },
+  { emoji: "💬", label: "WhatsApp", href: `https://wa.me/${WA}` },
+  { emoji: "💙", label: "Facebook", href: "https://facebook.com/asrarlalla" },
 ];
 
 const fadeUp = {

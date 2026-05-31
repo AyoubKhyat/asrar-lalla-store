@@ -1,4 +1,4 @@
-export const WHATSAPP_NUMBER = "212600000000";
+export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "212600000000";
 
 export const deliveryPrices: { city: string; price: number; delay: string }[] = [
   { city: "Casablanca", price: 0, delay: "24h" },

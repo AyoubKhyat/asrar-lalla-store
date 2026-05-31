@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ProductVisual from "@/components/ui/ProductVisual";
 import { useCart } from "@/store/cart";
 import { orderService } from "@/data/admin";
+import { deliveryPrices, FREE_SHIPPING_THRESHOLD } from "@/data/config";
 
 interface FormData {
   fullName: string;
@@ -54,6 +55,11 @@ export default function CheckoutPage() {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState<FormData>(initialForm);
   const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [submitting, setSubmitting] = useState(false);
+
+  const shippingEntry = deliveryPrices.find((d) => d.city === form.city);
+  const shippingCost = !form.city ? 0 : total >= FREE_SHIPPING_THRESHOLD ? 0 : (shippingEntry?.price ?? 15);
+  const grandTotal = total + shippingCost;
 
   const updateField = (field: keyof FormData, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -86,35 +92,41 @@ export default function CheckoutPage() {
     }
   };
 
-  const handleConfirm = () => {
-    const orderItems = items.map((item) => ({
-      productId: item.product.id,
-      name: item.product.name_fr,
-      price: item.product.price,
-      quantity: item.quantity,
-    }));
+  const handleConfirm = async () => {
+    setSubmitting(true);
+    try {
+      const orderItems = items.map((item) => ({
+        productId: item.product.id,
+        name: item.product.name_fr,
+        price: item.product.price,
+        quantity: item.quantity,
+      }));
 
-    const newOrder = orderService.create({
-      customer: {
-        fullName: form.fullName,
-        phone: form.phone,
-        city: form.city,
-        address: form.address,
-        notes: form.notes || undefined,
-      },
-      items: orderItems,
-      total,
-    });
+      const newOrder = await orderService.create({
+        customer: {
+          fullName: form.fullName,
+          phone: form.phone,
+          city: form.city,
+          address: form.address,
+          notes: form.notes || undefined,
+        },
+        items: orderItems,
+        total: grandTotal,
+      });
 
-    sessionStorage.setItem("asrar-order", JSON.stringify({
-      ref: newOrder.ref,
-      items: orderItems,
-      total,
-      customer: newOrder.customer,
-    }));
+      sessionStorage.setItem("asrar-order", JSON.stringify({
+        ref: newOrder.ref,
+        items: orderItems,
+        total: grandTotal,
+        shippingCost,
+        customer: newOrder.customer,
+      }));
 
-    clearCart();
-    router.push("/order-success");
+      clearCart();
+      router.push("/order-success");
+    } catch {
+      setSubmitting(false);
+    }
   };
 
   // Redirect if cart is empty and not on step 2 (might have just confirmed)
@@ -411,8 +423,8 @@ export default function CheckoutPage() {
                     </div>
                     <div className="flex justify-between text-sm font-[family-name:var(--font-body)]">
                       <span className="text-text-light">Livraison</span>
-                      <span className="text-success-text font-medium">
-                        Gratuite
+                      <span className={`font-medium ${shippingCost === 0 ? "text-success-text" : "text-text"}`}>
+                        {shippingCost === 0 ? "Gratuite" : `${shippingCost} DH`}
                       </span>
                     </div>
                     <div className="flex justify-between pt-2 border-t border-border">
@@ -420,7 +432,7 @@ export default function CheckoutPage() {
                         Total
                       </span>
                       <span className="text-xl font-bold text-text font-[family-name:var(--font-display)]">
-                        {total} DH
+                        {grandTotal} DH
                       </span>
                     </div>
                   </div>
@@ -478,9 +490,10 @@ export default function CheckoutPage() {
                   </button>
                   <button
                     onClick={handleConfirm}
-                    className="flex-[2] py-4 rounded-2xl text-sm font-bold gradient-pink text-white shadow-glow hover:shadow-glow-lg hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 font-[family-name:var(--font-display)]"
+                    disabled={submitting}
+                    className="flex-[2] py-4 rounded-2xl text-sm font-bold gradient-pink text-white shadow-glow hover:shadow-glow-lg hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 font-[family-name:var(--font-display)] disabled:opacity-60 disabled:pointer-events-none"
                   >
-                    Confirmer la commande
+                    {submitting ? "Envoi en cours..." : "Confirmer la commande"}
                   </button>
                 </div>
               </motion.div>

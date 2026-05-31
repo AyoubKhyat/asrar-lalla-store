@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-const WHATSAPP_NUMBER = "212600000000";
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "212600000000";
 
 export function buildWhatsAppProductLink(productName: string, price: number, quantity: number, slug: string) {
   const msg = `Bonjour ! 👋\n\nJe suis intéressée par :\n\n🛍️ *${productName}*\n💰 Prix : ${price} DH\n📦 Quantité : ${quantity}\n\n🔗 Lien : https://asrarlalla.ma/products/${slug}\n\nMerci !`;

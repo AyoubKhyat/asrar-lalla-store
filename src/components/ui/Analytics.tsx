@@ -6,9 +6,9 @@ import Script from "next/script";
 // ANALYTICS CONFIGURATION
 // Replace these IDs with your real ones before launch
 // ============================================
-const GA_ID = ""; // e.g. "G-XXXXXXXXXX"
-const META_PIXEL_ID = ""; // e.g. "1234567890"
-const CLARITY_ID = ""; // e.g. "abcdefghij"
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "";
+const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID ?? "";
 
 export default function Analytics() {
   return (

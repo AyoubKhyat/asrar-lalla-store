@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   orderService,
   productService,
-  inventoryService,
   settingsService,
   authService,
   type Order,
@@ -22,9 +21,8 @@ import {
   exportOrdersCSV,
   downloadCSV,
   printOrderSlip,
-  ADMIN_EMAIL,
 } from "@/data/admin";
-import { products as staticProducts, reviews as initialReviews } from "@/data/products";
+import { type Product, products as staticProducts, reviews as initialReviews } from "@/data/products";
 import { deliveryPrices } from "@/data/config";
 
 /* ------------------------------------------------------------------ */
@@ -168,21 +166,18 @@ function LoginScreen({ onAuth }: { onAuth: () => void }) {
   const [shake, setShake] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    // Small delay for UX feel
-    setTimeout(() => {
-      const success = authService.login(email || ADMIN_EMAIL, password);
-      if (success) {
-        onAuth();
-      } else {
-        setError(true);
-        setShake(true);
-        setLoading(false);
-        setTimeout(() => setShake(false), 500);
-      }
-    }, 300);
+    const success = await authService.login(email, password);
+    if (success) {
+      onAuth();
+    } else {
+      setError(true);
+      setShake(true);
+      setLoading(false);
+      setTimeout(() => setShake(false), 500);
+    }
   }
 
   return (
@@ -218,7 +213,7 @@ function LoginScreen({ onAuth }: { onAuth: () => void }) {
                   setEmail(e.target.value);
                   setError(false);
                 }}
-                placeholder={ADMIN_EMAIL}
+                placeholder="admin@asrarlalla.ma"
                 className="w-full rounded-xl border-2 border-border px-4 py-3 text-sm outline-none transition-colors focus:border-pink"
                 autoFocus
               />
@@ -635,7 +630,7 @@ function CommandesTab() {
   const [toast, setToast] = useState("");
 
   useEffect(() => {
-    setOrders(orderService.getAll());
+    orderService.getAll().then(setOrders);
   }, []);
 
   /* Derived data */
@@ -688,11 +683,10 @@ function CommandesTab() {
     return list;
   }, [orders, statusFilter, dateFilter, search]);
 
-  function handleStatusChange(id: string, status: OrderStatus) {
-    orderService.updateStatus(id, status);
-    const refreshed = orderService.getAll();
+  async function handleStatusChange(id: string, status: OrderStatus) {
+    await orderService.updateStatus(id, status);
+    const refreshed = await orderService.getAll();
     setOrders(refreshed);
-    // Update drawer if open
     if (drawerOrder && drawerOrder.id === id) {
       const updated = refreshed.find((o) => o.id === id);
       if (updated) setDrawerOrder(updated);
@@ -700,10 +694,11 @@ function CommandesTab() {
     setToast(`Statut mis a jour: ${statusLabels[status]}`);
   }
 
-  function handleBulkUpdate() {
+  async function handleBulkUpdate() {
     if (selectedIds.size === 0) return;
-    orderService.bulkUpdateStatus(Array.from(selectedIds), bulkStatus);
-    setOrders(orderService.getAll());
+    await orderService.bulkUpdateStatus(Array.from(selectedIds), bulkStatus);
+    const refreshed = await orderService.getAll();
+    setOrders(refreshed);
     setToast(`${selectedIds.size} commande(s) mise(s) a jour`);
     setSelectedIds(new Set());
   }
@@ -1022,13 +1017,13 @@ function CommandesTab() {
 /* ================================================================== */
 
 function ProduitsTab() {
-  const [allProducts, setAllProducts] = useState<ReturnType<typeof productService.getAllProducts>>([]);
-  const [editingProduct, setEditingProduct] = useState<ReturnType<typeof productService.getAllProducts>[number] | null>(null);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [editForm, setEditForm] = useState({ price: 0, stock: 0, is_trending: false, is_best_seller: false });
   const [toast, setToast] = useState("");
 
   useEffect(() => {
-    setAllProducts(productService.getAllProducts());
+    productService.getAllProducts().then(setAllProducts);
   }, []);
 
   const outOfStock = allProducts.filter((p) => p.stock === 0);
@@ -1044,15 +1039,16 @@ function ProduitsTab() {
     });
   }
 
-  function handleSaveEdit() {
+  async function handleSaveEdit() {
     if (!editingProduct) return;
-    productService.update(editingProduct.id, {
+    await productService.update(editingProduct.id, {
       price: editForm.price,
       stock: editForm.stock,
       is_trending: editForm.is_trending,
       is_best_seller: editForm.is_best_seller,
     });
-    setAllProducts(productService.getAllProducts());
+    const refreshed = await productService.getAllProducts();
+    setAllProducts(refreshed);
     setEditingProduct(null);
     setToast("Modifications sauvegardees");
   }
@@ -1093,7 +1089,7 @@ function ProduitsTab() {
       )}
 
       <div className="rounded-lg bg-blue-50 border border-blue-200 px-4 py-2.5 text-xs text-blue-700">
-        Les modifications sont sauvegard&eacute;es localement dans le navigateur
+        Les modifications sont sauvegard&eacute;es dans la base de donn&eacute;es
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -1248,14 +1244,14 @@ function ParametresTab() {
   const [toast, setToast] = useState("");
 
   useEffect(() => {
-    setSettings(settingsService.get());
+    settingsService.get().then(setSettings);
   }, []);
 
   if (!settings) return null;
 
-  function handleSave() {
+  async function handleSave() {
     if (!settings) return;
-    settingsService.update(settings);
+    await settingsService.update(settings);
     setToast("Parametres sauvegardes");
   }
 
@@ -1609,11 +1605,12 @@ export default function AdminPage() {
   useEffect(() => {
     if (!authed || !hydrated) return;
 
-    const orders = orderService.getAll();
-    setNewOrderCount(orders.filter((o) => o.status === "new").length);
-
-    const prods = productService.getAllProducts();
-    setLowStockCount(prods.filter((p) => p.stock <= 5).length);
+    orderService.getAll().then((orders) => {
+      setNewOrderCount(orders.filter((o) => o.status === "new").length);
+    });
+    productService.getAllProducts().then((prods) => {
+      setLowStockCount(prods.filter((p) => p.stock <= 5).length);
+    });
   }, [authed, hydrated, activeTab]);
 
   function handleLogout() {
