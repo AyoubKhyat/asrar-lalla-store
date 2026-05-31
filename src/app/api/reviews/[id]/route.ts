@@ -12,26 +12,36 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     const db = sql();
 
     const values: Record<string, unknown> = {};
-
-    if (body.stock !== undefined) values.stock = body.stock;
-    if (body.price !== undefined) values.price = body.price;
-    if (body.is_visible !== undefined) values.is_visible = body.is_visible;
-    if (body.is_trending !== undefined) values.is_trending = body.is_trending;
-    if (body.is_best_seller !== undefined) values.is_best_seller = body.is_best_seller;
-    if (body.badge !== undefined) values.badge = body.badge;
+    if (body.visible !== undefined) values.is_visible = body.visible;
+    if (body.verified !== undefined) values.is_verified = body.verified;
 
     if (Object.keys(values).length === 0) {
       return NextResponse.json({ error: "No fields to update" }, { status: 400 });
     }
 
     const [updated] = await db`
-      UPDATE products SET ${db(values)}
+      UPDATE reviews SET ${db(values)}
       WHERE id = ${id}
       RETURNING *
     `;
 
     if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });
-    return NextResponse.json(updated);
+    return NextResponse.json({ ok: true });
+  } catch {
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
+
+  try {
+    const { id } = await params;
+    const db = sql();
+
+    await db`DELETE FROM reviews WHERE id = ${id}`;
+    return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }

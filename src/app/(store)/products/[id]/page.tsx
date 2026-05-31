@@ -7,6 +7,8 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
   return products.map((product) => ({
     id: product.slug,

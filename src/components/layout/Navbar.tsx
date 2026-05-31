@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/store/cart";
 import Logo from "@/components/ui/Logo";
 
+
 const navLinks = [
   { label: "Accueil", href: "/" },
   { label: "Collection", href: "/products" },
@@ -16,7 +17,6 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { count, toggleCart } = useCart();
 
@@ -28,14 +28,6 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileOpen]);
 
   return (
     <>
@@ -148,113 +140,10 @@ export default function Navbar() {
               )}
             </motion.button>
 
-            {/* Mobile hamburger */}
-            <motion.button
-              onClick={() => setMobileOpen((v) => !v)}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl text-text-light hover:text-pink hover:bg-pink-accent transition-all"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4 }}
-              aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            >
-              <div className="w-5 h-4 flex flex-col justify-between relative">
-                <motion.span
-                  className="block h-[2px] w-5 bg-current rounded-full origin-center"
-                  animate={
-                    mobileOpen
-                      ? { rotate: 45, y: 7 }
-                      : { rotate: 0, y: 0 }
-                  }
-                  transition={{ duration: 0.3 }}
-                />
-                <motion.span
-                  className="block h-[2px] w-5 bg-current rounded-full"
-                  animate={
-                    mobileOpen
-                      ? { opacity: 0, scaleX: 0 }
-                      : { opacity: 1, scaleX: 1 }
-                  }
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.span
-                  className="block h-[2px] w-5 bg-current rounded-full origin-center"
-                  animate={
-                    mobileOpen
-                      ? { rotate: -45, y: -7 }
-                      : { rotate: 0, y: 0 }
-                  }
-                  transition={{ duration: 0.3 }}
-                />
-              </div>
-            </motion.button>
           </div>
         </nav>
       </motion.header>
 
-      {/* Mobile overlay menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            className="fixed inset-0 z-40 bg-white flex flex-col md:hidden"
-            style={{ top: "var(--banner-h, 0px)" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="h-16" /> {/* Spacer for header */}
-            <div className="flex-1 flex flex-col items-center justify-center gap-2 px-8">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.label}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ delay: i * 0.07, type: "spring", damping: 20, stiffness: 200 }}
-                  className="w-full text-center"
-                >
-                  {link.href.startsWith("/") ? (
-                    <Link
-                      href={link.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block py-4 text-2xl font-semibold text-text hover:text-pink transition-colors font-[family-name:var(--font-display)]"
-                    >
-                      {link.label}
-                    </Link>
-                  ) : (
-                    <a
-                      href={link.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block py-4 text-2xl font-semibold text-text hover:text-pink transition-colors font-[family-name:var(--font-display)]"
-                    >
-                      {link.label}
-                    </a>
-                  )}
-                </motion.div>
-              ))}
-
-              {/* Mobile CTA */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ delay: navLinks.length * 0.07 + 0.05 }}
-                className="mt-6"
-              >
-                <button
-                  onClick={() => {
-                    setMobileOpen(false);
-                    toggleCart();
-                  }}
-                  className="gradient-pink text-white px-8 py-3 rounded-2xl text-base font-semibold shadow-glow hover:shadow-glow-lg transition-shadow font-[family-name:var(--font-display)]"
-                >
-                  Mon Panier {count > 0 && `(${count})`}
-                </button>
-              </motion.div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 }

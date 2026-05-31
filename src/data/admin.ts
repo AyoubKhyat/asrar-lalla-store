@@ -76,8 +76,17 @@ export const statusEmoji: Record<OrderStatus, string> = {
 
 export const statusTimeline: OrderStatus[] = ["new", "confirmed", "preparing", "shipped", "delivered"];
 
-const AUTH_KEY = "asrar-admin-session";
-const SESSION_TIMEOUT = 30 * 60 * 1000;
+const TOKEN_KEY = "asrar-admin-token";
+
+function getToken(): string | null {
+  if (typeof window === "undefined") return null;
+  return localStorage.getItem(TOKEN_KEY);
+}
+
+function authHeaders(): Record<string, string> {
+  const token = getToken();
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
 
 // ==================== Auth Service ====================
 
@@ -90,8 +99,9 @@ export const authService = {
         body: JSON.stringify({ email, password }),
       });
       if (res.ok) {
+        const { token } = await res.json();
         if (typeof window !== "undefined") {
-          localStorage.setItem(AUTH_KEY, JSON.stringify({ authenticated: true, loginAt: Date.now() }));
+          localStorage.setItem(TOKEN_KEY, token);
         }
         return true;
       }
@@ -101,34 +111,11 @@ export const authService = {
     }
   },
   isAuthenticated(): boolean {
-    if (typeof window === "undefined") return false;
-    try {
-      const raw = localStorage.getItem(AUTH_KEY);
-      if (!raw) return false;
-      const session = JSON.parse(raw);
-      if (!session?.authenticated) return false;
-      if (Date.now() - session.loginAt > SESSION_TIMEOUT) {
-        this.logout();
-        return false;
-      }
-      return true;
-    } catch {
-      return false;
-    }
+    return !!getToken();
   },
-  refreshSession() {
-    if (typeof window === "undefined") return;
-    try {
-      const raw = localStorage.getItem(AUTH_KEY);
-      if (!raw) return;
-      const session = JSON.parse(raw);
-      if (session?.authenticated) {
-        localStorage.setItem(AUTH_KEY, JSON.stringify({ ...session, loginAt: Date.now() }));
-      }
-    } catch {}
-  },
+  refreshSession() {},
   logout() {
-    if (typeof window !== "undefined") localStorage.removeItem(AUTH_KEY);
+    if (typeof window !== "undefined") localStorage.removeItem(TOKEN_KEY);
   },
 };
 
@@ -137,7 +124,7 @@ export const authService = {
 export const orderService = {
   async getAll(status?: string): Promise<Order[]> {
     const params = status && status !== "all" ? `?status=${status}` : "";
-    const res = await fetch(`/api/orders${params}`);
+    const res = await fetch(`/api/orders${params}`, { headers: authHeaders() });
     if (!res.ok) return [];
     return res.json();
   },
@@ -159,7 +146,7 @@ export const orderService = {
   async updateStatus(id: string, status: OrderStatus): Promise<Order | undefined> {
     const res = await fetch(`/api/orders/${id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...authHeaders() },
       body: JSON.stringify({ status }),
     });
     if (!res.ok) return undefined;
@@ -171,7 +158,7 @@ export const orderService = {
   },
 
   async delete(id: string): Promise<void> {
-    await fetch(`/api/orders/${id}`, { method: "DELETE" });
+    await fetch(`/api/orders/${id}`, { method: "DELETE", headers: authHeaders() });
   },
 };
 
@@ -189,7 +176,7 @@ export const inventoryService = {
   async setStock(productId: string, stock: number): Promise<void> {
     await fetch(`/api/products/${productId}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...authHeaders() },
       body: JSON.stringify({ stock: Math.max(0, stock) }),
     });
   },
@@ -221,7 +208,7 @@ export const productService = {
   async update(id: string, updates: Partial<Product>): Promise<void> {
     await fetch(`/api/products/${id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...authHeaders() },
       body: JSON.stringify(updates),
     });
   },
@@ -246,7 +233,7 @@ export const settingsService = {
   async update(settings: Partial<SiteSettings>): Promise<void> {
     await fetch("/api/settings", {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...authHeaders() },
       body: JSON.stringify(settings),
     });
   },

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { instagramReviews } from "@/data/config";
 
@@ -66,11 +67,12 @@ function InstaFeedPreview() {
           <div className="bg-gray-800 h-4 flex justify-center items-center">
             <div className="w-12 h-1.5 bg-gray-700 rounded-full" />
           </div>
-          <img
+          <Image
             src="/brand/instagram/feed-templates.svg"
             alt="Instagram feed templates Asrar Lalla"
+            width={240}
+            height={420}
             className="w-full h-auto"
-            loading="lazy"
           />
         </motion.div>
 
@@ -85,11 +87,12 @@ function InstaFeedPreview() {
           <div className="bg-gray-800 h-4 flex justify-center items-center">
             <div className="w-12 h-1.5 bg-gray-700 rounded-full" />
           </div>
-          <img
+          <Image
             src="/brand/instagram/story-template.svg"
             alt="Instagram story template Asrar Lalla"
+            width={210}
+            height={374}
             className="w-full h-auto"
-            loading="lazy"
           />
         </motion.div>
 
@@ -103,11 +106,12 @@ function InstaFeedPreview() {
             <p className="text-center text-[10px] text-text-muted font-[family-name:var(--font-body)] mb-2 uppercase tracking-wider">
               Highlights
             </p>
-            <img
+            <Image
               src="/brand/instagram/highlight-covers.svg"
               alt="Instagram highlight covers Asrar Lalla"
+              width={200}
+              height={50}
               className="w-full h-auto"
-              loading="lazy"
             />
           </div>
         </motion.div>
@@ -122,11 +126,12 @@ function InstaFeedPreview() {
         transition={{ delay: 0.4, duration: 0.5 }}
       >
         <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#E1306C] p-0.5">
-          <img
+          <Image
             src="/brand/logos/instagram-avatar.svg"
             alt="Avatar Instagram Asrar Lalla"
+            width={40}
+            height={40}
             className="w-full h-auto rounded-full"
-            loading="lazy"
           />
         </div>
         <div>

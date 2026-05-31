@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo, useCallback } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   orderService,
@@ -22,7 +23,7 @@ import {
   downloadCSV,
   printOrderSlip,
 } from "@/data/admin";
-import { type Product, products as staticProducts, reviews as initialReviews } from "@/data/products";
+import { type Product, products as staticProducts } from "@/data/products";
 import { deliveryPrices } from "@/data/config";
 
 /* ------------------------------------------------------------------ */
@@ -104,33 +105,9 @@ interface AdminReview {
   city: string;
   rating: number;
   text: string;
-  product: string;
+  productId: string;
   verified: boolean;
   visible: boolean;
-}
-
-function loadReviews(): AdminReview[] {
-  if (typeof window === "undefined") return [];
-  try {
-    const raw = localStorage.getItem("asrar-admin-reviews");
-    if (raw) return JSON.parse(raw);
-  } catch {}
-  return initialReviews.map((r, i) => ({
-    id: String(i),
-    name: r.name,
-    city: r.city,
-    rating: r.rating,
-    text: r.text,
-    product: r.product,
-    verified: r.verified,
-    visible: true,
-  }));
-}
-
-function saveReviews(revs: AdminReview[]) {
-  try {
-    localStorage.setItem("asrar-admin-reviews", JSON.stringify(revs));
-  } catch {}
 }
 
 /* ------------------------------------------------------------------ */
@@ -190,7 +167,7 @@ function LoginScreen({ onAuth }: { onAuth: () => void }) {
         <div className="rounded-2xl bg-white p-8 shadow-card text-center">
           {/* Brand logo */}
           <div className="mx-auto mb-4">
-            <img src="/brand/logos/icon-mark.svg" alt="ASRAR LALLA" className="w-16 h-16 mx-auto" />
+            <Image src="/brand/logos/icon-mark.svg" alt="ASRAR LALLA" width={64} height={64} className="mx-auto" />
           </div>
 
           <h1 className="mb-1 text-xl font-bold font-[family-name:var(--font-display)] text-text">
@@ -1400,7 +1377,13 @@ function AvisTab() {
   const [toast, setToast] = useState("");
 
   useEffect(() => {
-    setRevs(loadReviews());
+    const token = typeof window !== "undefined" ? localStorage.getItem("asrar-admin-token") : null;
+    fetch("/api/reviews?all=true", {
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    })
+      .then((r) => r.json())
+      .then(setRevs)
+      .catch(() => {});
   }, []);
 
   const productName = useCallback((pid: string) => {
@@ -1408,13 +1391,17 @@ function AvisTab() {
     return p ? p.name_fr : pid;
   }, []);
 
-  function toggleVisibility(id: string) {
-    const updated = revs.map((r) =>
-      r.id === id ? { ...r, visible: !r.visible } : r
-    );
-    setRevs(updated);
-    saveReviews(updated);
-    setToast("Visibilite mise a jour");
+  async function toggleVisibility(id: string) {
+    const rev = revs.find((r) => r.id === id);
+    if (!rev) return;
+    const token = localStorage.getItem("asrar-admin-token");
+    await fetch(`/api/reviews/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+      body: JSON.stringify({ visible: !rev.visible }),
+    });
+    setRevs(revs.map((r) => (r.id === id ? { ...r, visible: !r.visible } : r)));
+    setToast("Visibilité mise à jour");
   }
 
   const visibleCount = revs.filter((r) => r.visible).length;
@@ -1477,7 +1464,7 @@ function AvisTab() {
                   {rev.text}
                 </p>
                 <p className="mt-1.5 text-xs text-text-muted">
-                  Produit : {productName(rev.product)}
+                  Produit : {productName(rev.productId)}
                 </p>
               </div>
 
@@ -1640,7 +1627,7 @@ export default function AdminPage() {
       <header className="fixed top-0 left-0 right-0 z-40 border-b border-border bg-white/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
           <div className="flex items-center gap-3">
-            <img src="/brand/logos/icon-mark.svg" alt="ASRAR LALLA" className="w-8 h-8" />
+            <Image src="/brand/logos/icon-mark.svg" alt="ASRAR LALLA" width={32} height={32} />
             <div>
               <h1 className="text-sm font-bold font-[family-name:var(--font-display)] text-text">
                 ASRAR LALLA &mdash; Administration

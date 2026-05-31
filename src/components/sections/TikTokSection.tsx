@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { tiktokVideos } from "@/data/config";
@@ -82,11 +83,12 @@ export default function TikTokSection() {
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              <img
+              <Image
                 src={tmpl.src}
                 alt={tmpl.alt}
+                width={300}
+                height={400}
                 className="w-full h-full object-cover"
-                loading="lazy"
               />
 
               {/* Overlay label */}

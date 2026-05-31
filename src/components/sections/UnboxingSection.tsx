@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 /* ------------------------------------------------------------------ */
@@ -133,11 +134,12 @@ function ShippingShowcase() {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
             <div className="overflow-hidden">
-              <img
+              <Image
                 src={card.src}
                 alt={card.alt}
+                width={400}
+                height={300}
                 className="w-full h-auto"
-                loading="lazy"
               />
             </div>
             <div className="px-3 py-3 text-center">

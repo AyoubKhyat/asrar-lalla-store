@@ -6,7 +6,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductVisual from "@/components/ui/ProductVisual";
 import { useCart } from "@/store/cart";
-import { orderService } from "@/data/admin";
 import { deliveryPrices, FREE_SHIPPING_THRESHOLD } from "@/data/config";
 
 interface FormData {
@@ -56,6 +55,7 @@ export default function CheckoutPage() {
   const [form, setForm] = useState<FormData>(initialForm);
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [orderError, setOrderError] = useState("");
 
   const shippingEntry = deliveryPrices.find((d) => d.city === form.city);
   const shippingCost = !form.city ? 0 : total >= FREE_SHIPPING_THRESHOLD ? 0 : (shippingEntry?.price ?? 15);
@@ -94,6 +94,7 @@ export default function CheckoutPage() {
 
   const handleConfirm = async () => {
     setSubmitting(true);
+    setOrderError("");
     try {
       const orderItems = items.map((item) => ({
         productId: item.product.id,
@@ -102,29 +103,43 @@ export default function CheckoutPage() {
         quantity: item.quantity,
       }));
 
-      const newOrder = await orderService.create({
-        customer: {
-          fullName: form.fullName,
-          phone: form.phone,
-          city: form.city,
-          address: form.address,
-          notes: form.notes || undefined,
-        },
-        items: orderItems,
-        total: grandTotal,
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customer: {
+            fullName: form.fullName,
+            phone: form.phone,
+            city: form.city,
+            address: form.address,
+            notes: form.notes || undefined,
+          },
+          items: orderItems,
+          total: grandTotal,
+          shippingCost,
+        }),
       });
 
+      const data = await res.json();
+
+      if (!res.ok) {
+        setOrderError(data.error || "Une erreur est survenue. Veuillez réessayer.");
+        setSubmitting(false);
+        return;
+      }
+
       sessionStorage.setItem("asrar-order", JSON.stringify({
-        ref: newOrder.ref,
+        ref: data.ref,
         items: orderItems,
         total: grandTotal,
         shippingCost,
-        customer: newOrder.customer,
+        customer: data.customer,
       }));
 
       clearCart();
       router.push("/order-success");
     } catch {
+      setOrderError("Erreur de connexion. Vérifiez votre internet et réessayez.");
       setSubmitting(false);
     }
   };
@@ -476,6 +491,17 @@ export default function CheckoutPage() {
                     )}
                   </div>
                 </div>
+
+                {/* Error message */}
+                {orderError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-red-50 border border-red-200 rounded-2xl p-4 text-sm text-red-700 font-[family-name:var(--font-body)]"
+                  >
+                    {orderError}
+                  </motion.div>
+                )}
 
                 {/* Action buttons */}
                 <div className="flex gap-3">

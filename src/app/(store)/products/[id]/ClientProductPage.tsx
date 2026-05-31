@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Product } from "@/data/products";
@@ -327,7 +328,7 @@ export default function ClientProductPage({
               <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
                 {labelMap[product.id].map((label) => (
                   <div key={label.src} className="flex-shrink-0 w-40 md:w-48 bg-white rounded-2xl shadow-soft border border-border overflow-hidden hover:shadow-glow transition-shadow">
-                    <img src={label.src} alt={label.alt} className="w-full h-auto" loading="lazy" />
+                    <Image src={label.src} alt={label.alt} width={192} height={192} className="w-full h-auto" />
                     <p className="text-xs text-text-muted text-center py-2">{label.alt}</p>
                   </div>
                 ))}

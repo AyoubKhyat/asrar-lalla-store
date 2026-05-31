@@ -132,6 +132,15 @@ INSERT INTO delivery_prices (city, price, delay, sort_order) VALUES
   ('Kénitra', 0, '24-48h', 10),
   ('Autres villes', 15, '48-72h', 99);
 
+-- ============================================
+-- NEWSLETTER
+-- ============================================
+CREATE TABLE newsletter_subscribers (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email TEXT UNIQUE NOT NULL,
+  subscribed_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 -- Auto-update updated_at trigger
 CREATE OR REPLACE FUNCTION update_updated_at()
 RETURNS TRIGGER AS $$
