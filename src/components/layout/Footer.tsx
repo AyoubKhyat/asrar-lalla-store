@@ -20,11 +20,11 @@ const shopLinks = [
 ];
 
 const aboutLinks = [
-  { label: "Notre histoire", href: "#secrets" },
-  { label: "Ingrédients", href: "#secrets" },
-  { label: "Avis clients", href: "#reviews" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Notre histoire", href: "/#secrets" },
+  { label: "Ingrédients", href: "/#secrets" },
+  { label: "Avis clients", href: "/#reviews" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const WA = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "212600000000";
@@ -147,21 +147,12 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {aboutLinks.map((link) => (
                   <li key={link.label}>
-                    {link.href.startsWith("/") ? (
-                      <Link
-                        href={link.href}
-                        className="text-sm text-text-light hover:text-pink transition-colors font-[family-name:var(--font-body)]"
-                      >
-                        {link.label}
-                      </Link>
-                    ) : (
-                      <a
-                        href={link.href}
-                        className="text-sm text-text-light hover:text-pink transition-colors font-[family-name:var(--font-body)]"
-                      >
-                        {link.label}
-                      </a>
-                    )}
+                    <Link
+                      href={link.href}
+                      className="text-sm text-text-light hover:text-pink transition-colors font-[family-name:var(--font-body)]"
+                    >
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>

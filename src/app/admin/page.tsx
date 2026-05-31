@@ -614,11 +614,13 @@ function CommandesTab() {
   const stats = useMemo(() => {
     const total = orders.length;
     const newCount = orders.filter((o) => o.status === "new").length;
-    const revenue = orders
-      .filter((o) => ["delivered", "confirmed", "shipped", "preparing"].includes(o.status))
-      .reduce((s, o) => s + o.total, 0);
+    const paidOrders = orders.filter((o) => ["delivered", "confirmed", "shipped", "preparing"].includes(o.status));
+    const revenue = paidOrders.reduce((s, o) => s + o.total, 0);
     const today = orders.filter((o) => isToday(o.createdAt)).length;
-    return { total, newCount, revenue, today };
+    const avgOrder = paidOrders.length > 0 ? Math.round(revenue / paidOrders.length) : 0;
+    const deliveredCount = orders.filter((o) => o.status === "delivered").length;
+    const conversionRate = total > 0 ? Math.round((deliveredCount / total) * 100) : 0;
+    return { total, newCount, revenue, today, avgOrder, conversionRate };
   }, [orders]);
 
   const statusCounts = useMemo(() => {
@@ -742,6 +744,26 @@ function CommandesTab() {
         </svg>
       ),
     },
+    {
+      label: "Panier moyen",
+      value: `${stats.avgOrder} DH`,
+      color: "bg-amber-50 text-amber-700",
+      icon: (
+        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
+        </svg>
+      ),
+    },
+    {
+      label: "Taux livraison",
+      value: `${stats.conversionRate}%`,
+      color: "bg-teal-50 text-teal-700",
+      icon: (
+        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+    },
   ];
 
   const dateFilters: { label: string; value: DateFilter }[] = [
@@ -754,7 +776,7 @@ function CommandesTab() {
   return (
     <div className="space-y-6">
       {/* Stat cards */}
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6 lg:gap-4">
         {statCards.map((c) => (
           <div key={c.label} className="rounded-2xl bg-white p-4 shadow-soft">
             <div className={`mb-2 inline-flex rounded-lg p-2 ${c.color}`}>

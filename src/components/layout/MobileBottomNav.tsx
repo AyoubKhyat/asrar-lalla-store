@@ -10,7 +10,7 @@ const tabs = [
   { href: "/", icon: "🏠", label: "Accueil" },
   { href: "/products", icon: "✨", label: "Collection" },
   { href: "/cart", icon: "🛒", label: "Panier", showBadge: true },
-  { href: "#reviews", icon: "💬", label: "Avis" },
+  { href: "/#reviews", icon: "💬", label: "Avis" },
 ];
 
 export default function MobileBottomNav() {
@@ -28,8 +28,7 @@ export default function MobileBottomNav() {
     >
       <div className="flex items-center justify-around py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         {tabs.map((tab) => {
-          const isActive = tab.href === "/" ? pathname === "/" : pathname.startsWith(tab.href);
-          const isAnchor = tab.href.startsWith("#");
+          const isActive = tab.href === "/" ? pathname === "/" : !tab.href.includes("#") && pathname.startsWith(tab.href);
 
           const inner = (
             <div className="flex flex-col items-center gap-0.5 relative py-1 px-3">
@@ -57,10 +56,6 @@ export default function MobileBottomNav() {
               )}
             </div>
           );
-
-          if (isAnchor) {
-            return <a key={tab.href} href={tab.href} className="cursor-pointer">{inner}</a>;
-          }
 
           return (
             <Link key={tab.href} href={tab.href} className="cursor-pointer">

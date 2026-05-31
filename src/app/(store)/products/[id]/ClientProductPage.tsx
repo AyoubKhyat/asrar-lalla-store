@@ -59,8 +59,11 @@ export default function ClientProductPage({
   const [quantity, setQuantity] = useState(1);
   const [howToUseOpen, setHowToUseOpen] = useState(false);
   const { addToCart } = useCart();
+  const outOfStock = product.stock <= 0;
+  const maxQty = Math.max(1, product.stock);
 
   const handleAddToCart = () => {
+    if (outOfStock) return;
     addToCart(product, quantity);
   };
 
@@ -262,7 +265,15 @@ export default function ClientProductPage({
                 </AnimatePresence>
               </div>
 
+              {/* Out of stock banner */}
+              {outOfStock && (
+                <div className="bg-red-50 border border-red-200 rounded-2xl p-4 mb-6 text-sm text-red-700 font-[family-name:var(--font-body)] font-medium">
+                  Rupture de stock — Ce produit est temporairement indisponible
+                </div>
+              )}
+
               {/* Quantity selector */}
+              {!outOfStock && (
               <div className="flex items-center gap-4 mb-6">
                 <span className="text-sm font-semibold text-text font-[family-name:var(--font-display)]">
                   Quantit&eacute;
@@ -278,22 +289,31 @@ export default function ClientProductPage({
                     {quantity}
                   </span>
                   <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="w-10 h-10 flex items-center justify-center text-text-light hover:text-pink hover:bg-pink-accent transition-all text-lg font-medium"
+                    onClick={() => setQuantity(Math.min(maxQty, quantity + 1))}
+                    disabled={quantity >= maxQty}
+                    className="w-10 h-10 flex items-center justify-center text-text-light hover:text-pink hover:bg-pink-accent transition-all text-lg font-medium disabled:opacity-30 disabled:pointer-events-none"
                   >
                     +
                   </button>
                 </div>
+                {product.stock <= 5 && (
+                  <span className="text-xs text-amber-600 font-medium font-[family-name:var(--font-body)]">
+                    Plus que {product.stock} en stock
+                  </span>
+                )}
               </div>
+              )}
 
               {/* Action buttons */}
               <div className="flex gap-3 mb-4">
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 py-3.5 rounded-2xl text-sm font-bold gradient-pink text-white shadow-glow hover:shadow-glow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 font-[family-name:var(--font-display)]"
+                  disabled={outOfStock}
+                  className="flex-1 py-3.5 rounded-2xl text-sm font-bold gradient-pink text-white shadow-glow hover:shadow-glow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 font-[family-name:var(--font-display)] disabled:opacity-50 disabled:pointer-events-none disabled:shadow-none"
                 >
-                  Ajouter au Panier &#128722;
+                  {outOfStock ? "Indisponible" : "Ajouter au Panier 🛒"}
                 </button>
+                {!outOfStock && (
                 <a
                   href={whatsappUrl}
                   target="_blank"
@@ -302,6 +322,7 @@ export default function ClientProductPage({
                 >
                   Commander via WhatsApp &#128172;
                 </a>
+                )}
               </div>
 
               {/* Trust line */}
@@ -408,10 +429,12 @@ export default function ClientProductPage({
         <div className="flex items-center gap-3">
           <button
             onClick={handleAddToCart}
-            className="flex-1 py-3 rounded-xl text-sm font-bold gradient-pink text-white shadow-glow active:scale-[0.98] transition-all duration-200 font-[family-name:var(--font-display)]"
+            disabled={outOfStock}
+            className="flex-1 py-3 rounded-xl text-sm font-bold gradient-pink text-white shadow-glow active:scale-[0.98] transition-all duration-200 font-[family-name:var(--font-display)] disabled:opacity-50 disabled:pointer-events-none"
           >
-            Ajouter &#128722;
+            {outOfStock ? "Indisponible" : "Ajouter 🛒"}
           </button>
+          {!outOfStock && (
           <a
             href={whatsappUrl}
             target="_blank"
@@ -420,6 +443,7 @@ export default function ClientProductPage({
           >
             WhatsApp &#128172;
           </a>
+          )}
         </div>
       </motion.div>
 

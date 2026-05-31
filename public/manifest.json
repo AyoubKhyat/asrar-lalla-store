@@ -1,0 +1,16 @@
+{
+  "name": "ASRAR LALLA — La Beauté Marocaine",
+  "short_name": "ASRAR LALLA",
+  "description": "Produits de beauté naturels marocains. Livraison partout au Maroc.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF9FB",
+  "theme_color": "#FF5FA2",
+  "icons": [
+    {
+      "src": "/brand/logos/icon-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

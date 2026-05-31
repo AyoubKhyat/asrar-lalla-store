@@ -53,16 +53,22 @@ function subscribe(listener: () => void) {
 }
 
 export function addToCart(product: Product, qty = 1) {
+  if (product.stock <= 0) return;
   const existing = state.items.find((i) => i.product.id === product.id);
   if (existing) {
+    const newQty = Math.min(existing.quantity + qty, product.stock);
+    if (newQty === existing.quantity) {
+      showToast("Quantité max atteinte");
+      return;
+    }
     state = {
       ...state,
       items: state.items.map((i) =>
-        i.product.id === product.id ? { ...i, quantity: i.quantity + qty } : i
+        i.product.id === product.id ? { ...i, quantity: newQty } : i
       ),
     };
   } else {
-    state = { ...state, items: [...state.items, { product, quantity: qty }] };
+    state = { ...state, items: [...state.items, { product, quantity: Math.min(qty, product.stock) }] };
   }
   emit();
   showToast(`${product.name_fr} ajouté au panier`);
@@ -75,10 +81,12 @@ export function removeFromCart(productId: string) {
 
 export function updateQuantity(productId: string, quantity: number) {
   if (quantity <= 0) { removeFromCart(productId); return; }
+  const item = state.items.find((i) => i.product.id === productId);
+  const max = item?.product.stock ?? quantity;
   state = {
     ...state,
     items: state.items.map((i) =>
-      i.product.id === productId ? { ...i, quantity } : i
+      i.product.id === productId ? { ...i, quantity: Math.min(quantity, max) } : i
     ),
   };
   emit();

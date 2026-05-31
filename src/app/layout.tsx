@@ -41,6 +41,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.svg",
+    apple: "/brand/logos/icon-mark.svg",
+  },
+  manifest: "/manifest.json",
+  other: {
+    "theme-color": "#FF5FA2",
   },
   authors: [{ name: "ASRAR LALLA" }],
   creator: "ASRAR LALLA",

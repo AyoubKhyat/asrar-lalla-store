@@ -1,12 +1,15 @@
 import type { MetadataRoute } from "next";
-import { products } from "@/data/products";
+import { sql } from "@/lib/db";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = "https://asrarlalla.ma";
+
+  const db = sql();
+  const products = await db<{ slug: string; updated_at: string | null }[]>`SELECT slug, updated_at FROM products ORDER BY id`;
 
   const productPages = products.map((p) => ({
     url: `${base}/products/${p.slug}`,
-    lastModified: new Date(),
+    lastModified: p.updated_at ? new Date(p.updated_at) : new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));
