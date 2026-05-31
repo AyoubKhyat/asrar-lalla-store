@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" fill="none">
+  <!-- PR Package / Influencer Kit Concept — Bird's eye view -->
+  <!-- Box: 30cm × 22cm × 10cm custom magnetic closure -->
+
+  <defs>
+    <linearGradient id="prGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFEAF3"/>
+      <stop offset="100%" stop-color="#FFCFE1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Box base -->
+  <rect x="50" y="50" width="500" height="380" rx="20" fill="url(#prGrad)"/>
+  <rect x="50" y="50" width="500" height="380" rx="20" fill="none" stroke="#FFCFE1" stroke-width="2"/>
+
+  <!-- Interior dividers (product compartments) -->
+  <!-- Top row: 3 tall products -->
+  <rect x="80" y="80" width="140" height="170" rx="16" fill="white" opacity="0.8"/>
+  <text x="150" y="170" font-family="'DM Sans', sans-serif" font-size="9" fill="#FF5FA2" text-anchor="middle">Eau de Rose</text>
+  <text x="150" y="185" font-family="'DM Sans', sans-serif" font-size="7" fill="#9CA3AF" text-anchor="middle">Spray 100ml</text>
+
+  <rect x="230" y="80" width="140" height="170" rx="16" fill="white" opacity="0.8"/>
+  <text x="300" y="170" font-family="'DM Sans', sans-serif" font-size="9" fill="#FF5FA2" text-anchor="middle">Huile Beauté</text>
+  <text x="300" y="185" font-family="'DM Sans', sans-serif" font-size="7" fill="#9CA3AF" text-anchor="middle">Dropper 30ml</text>
+
+  <rect x="380" y="80" width="140" height="170" rx="16" fill="white" opacity="0.8"/>
+  <text x="450" y="170" font-family="'DM Sans', sans-serif" font-size="9" fill="#FF5FA2" text-anchor="middle">Shampooing</text>
+  <text x="450" y="185" font-family="'DM Sans', sans-serif" font-size="7" fill="#9CA3AF" text-anchor="middle">Pump 250ml</text>
+
+  <!-- Bottom row: jars + small items -->
+  <rect x="80" y="265" width="110" height="130" rx="16" fill="white" opacity="0.8"/>
+  <text x="135" y="335" font-family="'DM Sans', sans-serif" font-size="9" fill="#FF5FA2" text-anchor="middle">Crème Rose</text>
+
+  <rect x="200" y="265" width="110" height="130" rx="16" fill="white" opacity="0.8"/>
+  <text x="255" y="335" font-family="'DM Sans', sans-serif" font-size="9" fill="#FF5FA2" text-anchor="middle">Savon Beldi</text>
+
+  <rect x="320" y="265" width="80" height="130" rx="16" fill="white" opacity="0.8"/>
+  <text x="360" y="335" font-family="'DM Sans', sans-serif" font-size="8" fill="#FF5FA2" text-anchor="middle">Khôl</text>
+
+  <rect x="410" y="265" width="80" height="130" rx="16" fill="white" opacity="0.8"/>
+  <text x="450" y="335" font-family="'DM Sans', sans-serif" font-size="8" fill="#FF5FA2" text-anchor="middle">Lip Balm</text>
+
+  <!-- Cards slot -->
+  <rect x="80" y="405" width="440" height="4" rx="2" fill="#FF5FA2" opacity="0.3"/>
+  <text x="300" y="425" font-family="'DM Sans', sans-serif" font-size="7" fill="#9CA3AF" text-anchor="middle">← Thank You Card + Influencer Insert + Discount Codes →</text>
+
+  <!-- Logo on lid (shown as text reference) -->
+  <text x="300" y="465" font-family="'Outfit', sans-serif" font-weight="700" font-size="14" letter-spacing="3" fill="#FF5FA2" text-anchor="middle" opacity="0.5">✿ ASRAR LALLA — PR KIT</text>
+</svg>

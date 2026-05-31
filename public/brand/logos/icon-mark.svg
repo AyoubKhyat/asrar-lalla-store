@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- ASRAR LALLA Icon Mark — standalone flower -->
+  <!-- Usage: favicon, app icon, watermark, pattern element -->
+  <!-- Min size: 16px -->
+
+  <ellipse cx="32" cy="14" rx="9" ry="16" fill="#FF5FA2" opacity="0.9"/>
+  <ellipse cx="32" cy="50" rx="9" ry="16" fill="#FF5FA2" opacity="0.9"/>
+  <ellipse cx="14" cy="32" rx="16" ry="9" fill="#FF5FA2" opacity="0.9"/>
+  <ellipse cx="50" cy="32" rx="16" ry="9" fill="#FF5FA2" opacity="0.9"/>
+
+  <ellipse cx="19" cy="19" rx="7" ry="12" fill="#FF85B8" opacity="0.7" transform="rotate(-45 19 19)"/>
+  <ellipse cx="45" cy="19" rx="7" ry="12" fill="#FF85B8" opacity="0.7" transform="rotate(45 45 19)"/>
+  <ellipse cx="19" cy="45" rx="7" ry="12" fill="#FF85B8" opacity="0.7" transform="rotate(45 19 45)"/>
+  <ellipse cx="45" cy="45" rx="7" ry="12" fill="#FF85B8" opacity="0.7" transform="rotate(-45 45 45)"/>
+
+  <circle cx="32" cy="32" r="9" fill="#FF5FA2"/>
+  <circle cx="32" cy="32" r="5" fill="#FFCFE1"/>
+  <circle cx="29.5" cy="29.5" r="2" fill="white" opacity="0.6"/>
+</svg>

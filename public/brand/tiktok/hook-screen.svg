@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" fill="none">
+  <!-- TikTok Hook Screen — First frame to grab attention -->
+  <!-- The first 1-2 seconds of the video -->
+
+  <!-- Background: solid pink -->
+  <rect width="1080" height="1920" fill="#FF5FA2"/>
+
+  <!-- Decorative circles -->
+  <circle cx="200" cy="400" r="120" fill="#FF85B8" opacity="0.3"/>
+  <circle cx="880" cy="1500" r="100" fill="#E8458A" opacity="0.2"/>
+
+  <!-- Hook text — large, centered, white -->
+  <text x="540" y="800" font-family="'Outfit', sans-serif" font-weight="900" font-size="72" fill="white" text-anchor="middle">
+    <tspan x="540" dy="0">ARRÊTEZ</tspan>
+    <tspan x="540" dy="86">TOUT ✋</tspan>
+  </text>
+
+  <text x="540" y="1040" font-family="'DM Sans', sans-serif" font-weight="500" font-size="32" fill="white" opacity="0.9" text-anchor="middle">
+    <tspan x="540" dy="0">Ce produit marocain va</tspan>
+    <tspan x="540" dy="44">changer votre peau</tspan>
+  </text>
+
+  <!-- Brand pill -->
+  <rect x="390" y="1160" width="300" height="56" rx="28" fill="white" opacity="0.2"/>
+  <text x="540" y="1196" font-family="'Outfit', sans-serif" font-weight="700" font-size="18" fill="white" text-anchor="middle">ASRAR LALLA 🌸</text>
+</svg>

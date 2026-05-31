@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" fill="none">
+  <!-- Instagram Story Template: PRODUCT PROMO -->
+  <!-- Export at 1080×1920px, sRGB -->
+
+  <defs>
+    <linearGradient id="storyBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFEAF3"/>
+      <stop offset="50%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFCFE1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1920" fill="url(#storyBg)"/>
+
+  <!-- Top safe zone indicator (where IG shows profile pic, skip area) -->
+  <rect x="0" y="0" width="1080" height="200" fill="none" stroke="#FF5FA2" stroke-width="0.5" opacity="0.2" stroke-dasharray="8 4"/>
+
+  <!-- Brand -->
+  <text x="540" y="280" font-family="'Outfit', sans-serif" font-weight="700" font-size="20" letter-spacing="3" fill="#FF5FA2" text-anchor="middle">ASRAR LALLA</text>
+
+  <!-- Product photo area -->
+  <rect x="120" y="340" width="840" height="840" rx="60" fill="white" opacity="0.6"/>
+  <text x="540" y="780" font-family="'DM Sans', sans-serif" font-size="24" fill="#FFCFE1" text-anchor="middle">[PHOTO PRODUIT 1:1]</text>
+
+  <!-- Product info -->
+  <text x="540" y="1280" font-family="'Outfit', sans-serif" font-weight="800" font-size="52" fill="#1A1A1A" text-anchor="middle">Crème de Rose</text>
+  <text x="540" y="1340" font-family="'DM Sans', sans-serif" font-size="24" fill="#6B6B6B" text-anchor="middle">L'effet glass skin en un pot 🌹</text>
+
+  <!-- Price -->
+  <rect x="390" y="1380" width="300" height="80" rx="40" fill="white"/>
+  <text x="540" y="1432" font-family="'Outfit', sans-serif" font-weight="800" font-size="40" fill="#FF5FA2" text-anchor="middle">13 DH</text>
+
+  <!-- Swipe up CTA area -->
+  <rect x="290" y="1560" width="500" height="80" rx="40" fill="#FF5FA2"/>
+  <text x="540" y="1610" font-family="'Outfit', sans-serif" font-weight="700" font-size="24" fill="white" text-anchor="middle">COMMANDER MAINTENANT ✨</text>
+
+  <!-- Bottom safe zone -->
+  <rect x="0" y="1760" width="1080" height="160" fill="none" stroke="#FF5FA2" stroke-width="0.5" opacity="0.2" stroke-dasharray="8 4"/>
+
+  <!-- Decorative blobs -->
+  <circle cx="100" cy="600" r="80" fill="#FFCFE1" opacity="0.2"/>
+  <circle cx="950" cy="1400" r="60" fill="#E8DEFF" opacity="0.15"/>
+</svg>

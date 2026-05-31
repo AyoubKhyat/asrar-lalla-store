@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 360" fill="none">
+  <!-- Shipping Box — Top View (unfolded) -->
+  <!-- Dimensions: 25cm × 18cm × 8cm -->
+  <!-- Material: Corrugated cardboard, exterior printed -->
+
+  <defs>
+    <pattern id="flowerPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <ellipse cx="20" cy="12" rx="3" ry="6" fill="#FFCFE1" opacity="0.15"/>
+      <ellipse cx="20" cy="28" rx="3" ry="6" fill="#FFCFE1" opacity="0.15"/>
+      <ellipse cx="12" cy="20" rx="6" ry="3" fill="#FFCFE1" opacity="0.15"/>
+      <ellipse cx="28" cy="20" rx="6" ry="3" fill="#FFCFE1" opacity="0.15"/>
+      <circle cx="20" cy="20" r="2" fill="#FFCFE1" opacity="0.2"/>
+    </pattern>
+  </defs>
+
+  <!-- Box exterior -->
+  <rect x="10" y="10" width="480" height="340" rx="8" fill="#FFEAF3"/>
+  <rect x="10" y="10" width="480" height="340" rx="8" fill="url(#flowerPattern)"/>
+
+  <!-- Center logo area -->
+  <rect x="140" y="100" width="220" height="160" rx="12" fill="white" opacity="0.9"/>
+
+  <!-- Logo -->
+  <g transform="translate(218, 115) scale(0.5)">
+    <ellipse cx="32" cy="14" rx="9" ry="16" fill="#FF5FA2" opacity="0.9"/>
+    <ellipse cx="32" cy="50" rx="9" ry="16" fill="#FF5FA2" opacity="0.9"/>
+    <ellipse cx="14" cy="32" rx="16" ry="9" fill="#FF5FA2" opacity="0.9"/>
+    <ellipse cx="50" cy="32" rx="16" ry="9" fill="#FF5FA2" opacity="0.9"/>
+    <circle cx="32" cy="32" r="7" fill="#FF5FA2"/>
+    <circle cx="32" cy="32" r="4" fill="#FFCFE1"/>
+  </g>
+
+  <text x="250" y="165" font-family="'Outfit', sans-serif" font-weight="700" font-size="18" letter-spacing="3" fill="#1A1A1A" text-anchor="middle">ASRAR LALLA</text>
+
+  <circle cx="234" y="178" r="1.5" fill="#FFCFE1"/>
+  <circle cx="250" y="178" r="1.5" fill="#FF5FA2"/>
+  <circle cx="266" y="178" r="1.5" fill="#FFCFE1"/>
+
+  <text x="250" y="200" font-family="'DM Sans', sans-serif" font-size="8" letter-spacing="1" fill="#9CA3AF" text-anchor="middle">LA BEAUTÉ MAROCAINE, RÉINVENTÉE</text>
+
+  <!-- Interior message (shown on inside lid flap) -->
+  <text x="250" y="235" font-family="'DM Sans', sans-serif" font-size="9" fill="#FF5FA2" text-anchor="middle" font-style="italic">Bienvenue dans l'univers ASRAR LALLA 🌸</text>
+
+  <!-- Box dimensions annotation -->
+  <text x="250" y="330" font-family="monospace" font-size="8" fill="#CCCCCC" text-anchor="middle">25cm × 18cm × 8cm — Exterior: #FFEAF3 — Interior: #FFCFE1</text>
+</svg>

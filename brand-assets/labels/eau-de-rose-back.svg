@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" fill="none">
+  <!-- Eau de Rose — Back Label -->
+  <!-- Print: 50mm × 80mm, 300dpi -->
+
+  <rect width="200" height="320" rx="12" fill="white"/>
+
+  <!-- Brand -->
+  <text x="100" y="25" font-family="'Outfit', sans-serif" font-weight="700" font-size="8" letter-spacing="2" fill="#FF5FA2" text-anchor="middle">ASRAR LALLA</text>
+  <line x1="30" y1="35" x2="170" y2="35" stroke="#FFEAF3" stroke-width="0.5"/>
+
+  <!-- Product name -->
+  <text x="100" y="55" font-family="'Outfit', sans-serif" font-weight="700" font-size="11" fill="#1A1A1A" text-anchor="middle">Eau de Rose Distillée</text>
+
+  <!-- Description -->
+  <text x="18" y="78" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#6B6B6B" line-height="1.6">
+    <tspan x="18" dy="0">Hydrate, tonifie et illumine votre</tspan>
+    <tspan x="18" dy="12">peau. Distillée à partir de roses</tspan>
+    <tspan x="18" dy="12">de Damas de la Vallée des Roses,</tspan>
+    <tspan x="18" dy="12">Kelaat M'Gouna, Maroc.</tspan>
+  </text>
+
+  <line x1="18" y1="130" x2="182" y2="130" stroke="#FFEAF3" stroke-width="0.5"/>
+
+  <!-- Mode d'emploi -->
+  <text x="18" y="148" font-family="'Outfit', sans-serif" font-weight="700" font-size="7" letter-spacing="1" fill="#FF5FA2">MODE D'EMPLOI</text>
+  <text x="18" y="163" font-family="'DM Sans', sans-serif" font-size="7" fill="#6B6B6B">
+    <tspan x="18" dy="0">Vaporisez sur le visage propre à</tspan>
+    <tspan x="18" dy="11">20cm de distance. Utilisez comme</tspan>
+    <tspan x="18" dy="11">tonique, brume rafraîchissante ou</tspan>
+    <tspan x="18" dy="11">fixateur de maquillage.</tspan>
+  </text>
+
+  <line x1="18" y1="210" x2="182" y2="210" stroke="#FFEAF3" stroke-width="0.5"/>
+
+  <!-- Ingrédients -->
+  <text x="18" y="228" font-family="'Outfit', sans-serif" font-weight="700" font-size="7" letter-spacing="1" fill="#FF5FA2">INGRÉDIENTS / INCI</text>
+  <text x="18" y="243" font-family="'DM Sans', sans-serif" font-size="6.5" fill="#9CA3AF">
+    <tspan x="18" dy="0">Rosa Damascena Flower Water</tspan>
+  </text>
+
+  <line x1="18" y1="260" x2="182" y2="260" stroke="#FFEAF3" stroke-width="0.5"/>
+
+  <!-- Certifications -->
+  <text x="18" y="278" font-family="'DM Sans', sans-serif" font-size="6.5" fill="#6B6B6B">
+    <tspan x="18" dy="0">🌿 100% Naturel · 🐰 Cruelty Free</tspan>
+    <tspan x="18" dy="11">📍 Fabriqué au Maroc</tspan>
+  </text>
+
+  <!-- Bottom -->
+  <text x="100" y="305" font-family="'DM Sans', sans-serif" font-size="6" fill="#9CA3AF" text-anchor="middle">100 ml · asrarlalla.ma</text>
+
+  <!-- Barcode placeholder -->
+  <rect x="70" y="308" width="60" height="2" rx="1" fill="#E5E7EB"/>
+</svg>

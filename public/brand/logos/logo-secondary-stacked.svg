@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" fill="none">
+  <!-- ASRAR LALLA Stacked Logo: Icon centered above wordmark -->
+  <!-- Usage: Social media, landing pages, banners -->
+
+  <!-- Flower Icon -->
+  <g transform="translate(72, 0)">
+    <ellipse cx="28" cy="14" rx="7" ry="13" fill="#FF5FA2" opacity="0.9"/>
+    <ellipse cx="28" cy="42" rx="7" ry="13" fill="#FF5FA2" opacity="0.9"/>
+    <ellipse cx="14" cy="28" rx="13" ry="7" fill="#FF5FA2" opacity="0.9"/>
+    <ellipse cx="42" cy="28" rx="13" ry="7" fill="#FF5FA2" opacity="0.9"/>
+    <ellipse cx="17" cy="17" rx="5.5" ry="10" fill="#FF85B8" opacity="0.7" transform="rotate(-45 17 17)"/>
+    <ellipse cx="39" cy="17" rx="5.5" ry="10" fill="#FF85B8" opacity="0.7" transform="rotate(45 39 17)"/>
+    <ellipse cx="17" cy="39" rx="5.5" ry="10" fill="#FF85B8" opacity="0.7" transform="rotate(45 17 39)"/>
+    <ellipse cx="39" cy="39" rx="5.5" ry="10" fill="#FF85B8" opacity="0.7" transform="rotate(-45 39 39)"/>
+    <circle cx="28" cy="28" r="7" fill="#FF5FA2"/>
+    <circle cx="28" cy="28" r="4" fill="#FFCFE1"/>
+    <circle cx="26" cy="26" r="1.5" fill="white" opacity="0.6"/>
+  </g>
+
+  <!-- Wordmark centered -->
+  <text x="100" y="80" font-family="'Outfit', sans-serif" font-weight="700" font-size="22" letter-spacing="4" fill="#1A1A1A" text-anchor="middle">ASRAR <tspan fill="#FF5FA2">LALLA</tspan></text>
+
+  <!-- Decorative dots -->
+  <circle cx="88" cy="92" r="1.5" fill="#FFCFE1"/>
+  <circle cx="100" cy="92" r="1.5" fill="#FF5FA2"/>
+  <circle cx="112" cy="92" r="1.5" fill="#FFCFE1"/>
+
+  <!-- Tagline -->
+  <text x="100" y="110" font-family="'DM Sans', sans-serif" font-weight="400" font-size="8" letter-spacing="1.2" fill="#9CA3AF" text-anchor="middle">LA BEAUTÉ MAROCAINE, RÉINVENTÉE</text>
+</svg>

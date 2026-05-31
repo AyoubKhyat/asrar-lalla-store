@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ASRAR LALLA — La Beauté Marocaine, Réinventée
+
+A modern e-commerce store for Moroccan natural beauty products. Built for real sales with cash-on-delivery, WhatsApp ordering, and mobile-first design.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router, TypeScript)
+- **Styling:** Tailwind CSS v4
+- **Animations:** Framer Motion
+- **Smooth Scroll:** Lenis
+- **State:** useSyncExternalStore + localStorage
+- **Deployment:** Vercel (static SSG)
+
+## Features
+
+- 16 products with premium SVG packaging visuals
+- WhatsApp ordering on every product (one-tap)
+- Cash-on-delivery checkout flow
+- Admin dashboard (/admin) with order management
+- Product packs with bundle pricing
+- Mobile bottom navigation
+- SEO: sitemap, robots.txt, JSON-LD structured data, Open Graph
+- Analytics placeholders (GA4, Meta Pixel, Clarity)
+- Responsive design (mobile-first)
+- French/Arabic bilingual product names
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Before launching, update these files:
 
-## Learn More
+### WhatsApp Number
+```
+src/data/config.ts         → WHATSAPP_NUMBER
+src/components/ui/WhatsAppButton.tsx → WHATSAPP_NUMBER
+src/data/admin.ts          → default whatsappNumber in settingsService
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Social Media URLs
+```
+src/components/layout/Footer.tsx → Instagram, TikTok, WhatsApp, Facebook URLs
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Analytics
+```
+src/components/ui/Analytics.tsx → GA_ID, META_PIXEL_ID, CLARITY_ID
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Admin Login
+```
+Default: admin@asrarlalla.ma / asrar2026
+Change in: src/data/admin.ts → ADMIN_EMAIL, ADMIN_PASSWORD
+```
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Vercel (Recommended)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push to GitHub
+2. Import project on [vercel.com](https://vercel.com)
+3. Framework: Next.js (auto-detected)
+4. Deploy
+
+### Custom Domain
+
+Add these DNS records for `asrarlalla.ma`:
+- `A` record → `76.76.21.21`
+- `CNAME` record for `www` → `cname.vercel-dns.com`
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── (store)/          # Customer-facing pages (with Navbar/Footer)
+│   │   ├── page.tsx      # Homepage
+│   │   ├── products/     # Catalog + detail pages
+│   │   ├── cart/
+│   │   ├── checkout/
+│   │   └── order-success/
+│   ├── admin/            # Admin dashboard (standalone layout)
+│   ├── layout.tsx        # Root layout
+│   ├── sitemap.ts
+│   └── robots.ts
+├── components/
+│   ├── sections/         # Homepage sections
+│   ├── layout/           # Navbar, Footer, MobileBottomNav
+│   ├── cart/             # Cart panel
+│   └── ui/               # Logo, ProductVisual, Toast, etc.
+├── data/
+│   ├── products.ts       # Product catalog
+│   ├── config.ts         # Packs, delivery prices, trust badges
+│   └── admin.ts          # Order/inventory/auth services
+├── store/
+│   └── cart.ts           # Cart state with localStorage persistence
+└── hooks/
+    └── useLenis.ts       # Smooth scrolling
+```
+
+## License
+
+Private — All rights reserved © 2026 ASRAR LALLA

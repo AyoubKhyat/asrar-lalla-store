@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 200" fill="none">
+  <!-- Referral Card — business card size -->
+  <!-- Print: 85mm × 55mm, 300dpi, 350gsm card stock -->
+
+  <rect width="340" height="200" rx="12" fill="white"/>
+  <rect width="340" height="200" rx="12" fill="none" stroke="#FFCFE1" stroke-width="1"/>
+
+  <!-- Top accent -->
+  <rect x="0" y="0" width="340" height="4" rx="2" fill="#FF5FA2"/>
+
+  <!-- Heading -->
+  <text x="170" y="38" font-family="'Outfit', sans-serif" font-weight="800" font-size="16" fill="#1A1A1A" text-anchor="middle">OFFREZ LA BEAUTÉ 🌸</text>
+
+  <!-- Body -->
+  <text x="170" y="62" font-family="'DM Sans', sans-serif" font-size="9" fill="#6B6B6B" text-anchor="middle">Donnez ce code à une amie :</text>
+
+  <!-- Code box -->
+  <rect x="100" y="72" width="140" height="36" rx="18" fill="#FFEAF3" stroke="#FFCFE1" stroke-width="1"/>
+  <text x="170" y="96" font-family="'Outfit', sans-serif" font-weight="800" font-size="18" fill="#FF5FA2" text-anchor="middle">AMIE10</text>
+
+  <!-- Benefit -->
+  <text x="170" y="128" font-family="'DM Sans', sans-serif" font-size="8" fill="#6B6B6B" text-anchor="middle">-10% sur sa première commande</text>
+
+  <!-- Divider -->
+  <line x1="40" y1="142" x2="300" y2="142" stroke="#FFEAF3" stroke-width="0.5"/>
+
+  <!-- Tagline -->
+  <text x="170" y="162" font-family="'DM Sans', sans-serif" font-size="8" fill="#9CA3AF" text-anchor="middle" font-style="italic">Elle glow, vous glow, tout le monde glow ✨</text>
+
+  <!-- Website -->
+  <text x="170" y="185" font-family="'DM Sans', sans-serif" font-size="7" fill="#FF5FA2" text-anchor="middle">asrarlalla.ma</text>
+</svg>

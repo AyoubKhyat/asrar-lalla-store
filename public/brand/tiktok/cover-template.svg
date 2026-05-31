@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" fill="none">
+  <!-- TikTok Video Cover Template -->
+  <!-- Export at 1080×1920px -->
+  <!-- This is the thumbnail that shows in the TikTok grid -->
+
+  <defs>
+    <linearGradient id="ttBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFEAF3"/>
+      <stop offset="100%" stop-color="#FFCFE1"/>
+    </linearGradient>
+    <linearGradient id="ttOverlay" x1="0%" y1="50%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#1A1A1A" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1920" fill="url(#ttBg)"/>
+
+  <!-- Photo area -->
+  <rect x="0" y="0" width="1080" height="1920" fill="none"/>
+  <text x="540" y="800" font-family="'DM Sans', sans-serif" font-size="24" fill="#FFCFE1" text-anchor="middle">[VIDEO THUMBNAIL / PHOTO]</text>
+
+  <!-- Bottom gradient overlay -->
+  <rect x="0" y="960" width="1080" height="960" fill="url(#ttOverlay)"/>
+
+  <!-- Brand watermark top -->
+  <rect x="40" y="60" width="180" height="44" rx="22" fill="white" opacity="0.9"/>
+  <text x="130" y="88" font-family="'Outfit', sans-serif" font-weight="700" font-size="14" letter-spacing="1.5" fill="#FF5FA2" text-anchor="middle">ASRAR LALLA</text>
+
+  <!-- Hook text (the big attention-grabbing text) -->
+  <text x="60" y="1580" font-family="'Outfit', sans-serif" font-weight="800" font-size="56" fill="white" line-height="1.1">
+    <tspan x="60" dy="0">Ce produit à 5 DH</tspan>
+    <tspan x="60" dy="66">a remplacé mon</tspan>
+    <tspan x="60" dy="66" fill="#FF5FA2">sérum à 200 DH</tspan>
+  </text>
+
+  <!-- Bottom bar -->
+  <rect x="60" y="1820" width="200" height="40" rx="20" fill="#FF5FA2"/>
+  <text x="160" y="1846" font-family="'Outfit', sans-serif" font-weight="700" font-size="14" fill="white" text-anchor="middle">LIEN EN BIO 🔗</text>
+</svg>

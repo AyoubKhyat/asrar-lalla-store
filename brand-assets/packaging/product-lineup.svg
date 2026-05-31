@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" fill="none">
+  <!-- Product Lineup Mockup — All core products side by side -->
+  <!-- Use as hero image, Instagram flat lay reference, or press kit visual -->
+  <!-- Background: Studio pink gradient -->
+
+  <defs>
+    <linearGradient id="studioBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8FB"/>
+      <stop offset="100%" stop-color="#FFEAF3"/>
+    </linearGradient>
+    <radialGradient id="spotlight" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="600" fill="url(#studioBg)"/>
+  <rect width="1200" height="600" fill="url(#spotlight)"/>
+
+  <!-- Shadow line (ground plane) -->
+  <ellipse cx="600" cy="520" rx="500" ry="20" fill="#FFD5E0" opacity="0.3"/>
+
+  <!-- 1. Eau de Rose Spray — tall bottle -->
+  <g transform="translate(80, 100)">
+    <!-- Bottle body -->
+    <rect x="35" y="60" width="50" height="160" rx="10" fill="url(#roseBottle)"/>
+    <defs><linearGradient id="roseBottle" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFD5DB"/><stop offset="100%" stop-color="#FBB5C0"/></linearGradient></defs>
+    <!-- Glass highlight -->
+    <rect x="35" y="60" width="18" height="160" rx="8" fill="white" opacity="0.3"/>
+    <!-- Neck -->
+    <rect x="45" y="30" width="30" height="35" rx="4" fill="#FFD5DB"/>
+    <!-- Pump cap -->
+    <rect x="40" y="10" width="40" height="25" rx="6" fill="#E8458A" opacity="0.6"/>
+    <rect x="55" y="0" width="10" height="14" rx="3" fill="#E8458A" opacity="0.4"/>
+    <!-- Label -->
+    <rect x="40" y="100" width="40" height="50" rx="4" fill="white" opacity="0.9"/>
+    <text x="60" y="120" font-family="'Outfit', sans-serif" font-size="4" fill="#FF5FA2" text-anchor="middle">ASRAR LALLA</text>
+    <text x="60" y="130" font-family="'Outfit', sans-serif" font-weight="700" font-size="5" fill="#1A1A1A" text-anchor="middle">EAU DE</text>
+    <text x="60" y="138" font-family="'Outfit', sans-serif" font-weight="700" font-size="5" fill="#1A1A1A" text-anchor="middle">ROSE</text>
+    <!-- Shadow -->
+    <ellipse cx="60" cy="225" rx="30" ry="6" fill="#1A1A1A" opacity="0.06"/>
+    <!-- Name -->
+    <text x="60" y="260" font-family="'DM Sans', sans-serif" font-size="10" fill="#1A1A1A" text-anchor="middle" font-weight="500">Eau de Rose</text>
+    <text x="60" y="275" font-family="'Outfit', sans-serif" font-size="11" fill="#FF5FA2" text-anchor="middle" font-weight="700">15 DH</text>
+  </g>
+
+  <!-- 2. Savon Beldi Jar -->
+  <g transform="translate(250, 180)">
+    <!-- Jar body -->
+    <rect x="10" y="30" width="90" height="70" rx="20" fill="#C8EDD5"/>
+    <rect x="10" y="30" width="30" height="70" rx="15" fill="white" opacity="0.25"/>
+    <!-- Lid -->
+    <rect x="5" y="10" width="100" height="25" rx="12" fill="#B8960E" opacity="0.3"/>
+    <rect x="5" y="10" width="100" height="12" rx="8" fill="#D4AF37" opacity="0.2"/>
+    <!-- Label -->
+    <rect x="25" y="45" width="60" height="35" rx="4" fill="white" opacity="0.9"/>
+    <text x="55" y="60" font-family="'Outfit', sans-serif" font-size="3.5" fill="#FF5FA2" text-anchor="middle">ASRAR LALLA</text>
+    <text x="55" y="70" font-family="'Outfit', sans-serif" font-weight="700" font-size="5" fill="#1A1A1A" text-anchor="middle">SAVON BELDI</text>
+    <!-- Shadow -->
+    <ellipse cx="55" cy="106" rx="40" ry="6" fill="#1A1A1A" opacity="0.05"/>
+    <text x="55" y="140" font-family="'DM Sans', sans-serif" font-size="10" fill="#1A1A1A" text-anchor="middle" font-weight="500">Savon Beldi</text>
+    <text x="55" y="155" font-family="'Outfit', sans-serif" font-size="11" fill="#FF5FA2" text-anchor="middle" font-weight="700">5 DH</text>
+  </g>
+
+  <!-- 3. Crème Rose Jar -->
+  <g transform="translate(440, 170)">
+    <rect x="10" y="30" width="100" height="75" rx="22" fill="#FDDAEE"/>
+    <rect x="10" y="30" width="35" height="75" rx="16" fill="white" opacity="0.25"/>
+    <rect x="5" y="8" width="110" height="28" rx="14" fill="#F9B5D8" opacity="0.5"/>
+    <rect x="20" y="50" width="80" height="35" rx="4" fill="white" opacity="0.9"/>
+    <text x="60" y="65" font-family="'Outfit', sans-serif" font-size="3.5" fill="#FF5FA2" text-anchor="middle">ASRAR LALLA</text>
+    <text x="60" y="74" font-family="'Outfit', sans-serif" font-weight="700" font-size="4.5" fill="#1A1A1A" text-anchor="middle">CRÈME DE ROSE</text>
+    <ellipse cx="60" cy="112" rx="45" ry="6" fill="#1A1A1A" opacity="0.05"/>
+    <text x="60" y="148" font-family="'DM Sans', sans-serif" font-size="10" fill="#1A1A1A" text-anchor="middle" font-weight="500">Crème de Rose</text>
+    <text x="60" y="163" font-family="'Outfit', sans-serif" font-size="11" fill="#FF5FA2" text-anchor="middle" font-weight="700">13 DH</text>
+  </g>
+
+  <!-- 4. Huile Beauté Dropper -->
+  <g transform="translate(640, 120)">
+    <rect x="30" y="70" width="40" height="130" rx="8" fill="#FEEDA6"/>
+    <rect x="30" y="70" width="14" height="130" rx="6" fill="white" opacity="0.3"/>
+    <rect x="38" y="40" width="24" height="35" rx="4" fill="#FEEDA6" opacity="0.8"/>
+    <!-- Dropper bulb -->
+    <ellipse cx="50" cy="28" rx="12" ry="14" fill="#FF5FA2" opacity="0.4"/>
+    <rect x="46" y="36" width="8" height="10" fill="#FF5FA2" opacity="0.3"/>
+    <!-- Label -->
+    <rect x="33" y="100" width="34" height="45" rx="3" fill="white" opacity="0.9"/>
+    <text x="50" y="115" font-family="'Outfit', sans-serif" font-size="3" fill="#FF5FA2" text-anchor="middle">ASRAR LALLA</text>
+    <text x="50" y="125" font-family="'Outfit', sans-serif" font-weight="700" font-size="4" fill="#1A1A1A" text-anchor="middle">HUILE DE</text>
+    <text x="50" y="133" font-family="'Outfit', sans-serif" font-weight="700" font-size="4" fill="#1A1A1A" text-anchor="middle">BEAUTÉ</text>
+    <ellipse cx="50" cy="206" rx="25" ry="5" fill="#1A1A1A" opacity="0.05"/>
+    <text x="50" y="242" font-family="'DM Sans', sans-serif" font-size="10" fill="#1A1A1A" text-anchor="middle" font-weight="500">Huile Beauté</text>
+    <text x="50" y="257" font-family="'Outfit', sans-serif" font-size="11" fill="#FF5FA2" text-anchor="middle" font-weight="700">10 DH</text>
+  </g>
+
+  <!-- 5. Lip Balm Stick -->
+  <g transform="translate(810, 200)">
+    <rect x="25" y="20" width="30" height="100" rx="12" fill="white" stroke="#FFEAF3" stroke-width="1"/>
+    <!-- Cap -->
+    <rect x="22" y="0" width="36" height="30" rx="14" fill="#FF5FA2" opacity="0.7"/>
+    <!-- Label -->
+    <text x="40" y="60" font-family="'Outfit', sans-serif" font-size="3" fill="#FF5FA2" text-anchor="middle">ASRAR</text>
+    <text x="40" y="67" font-family="'Outfit', sans-serif" font-size="3" fill="#FF5FA2" text-anchor="middle">LALLA</text>
+    <text x="40" y="80" font-family="'Outfit', sans-serif" font-weight="700" font-size="3.5" fill="#1A1A1A" text-anchor="middle">LIP GLOW</text>
+    <ellipse cx="40" cy="125" rx="18" ry="4" fill="#1A1A1A" opacity="0.05"/>
+    <text x="40" y="155" font-family="'DM Sans', sans-serif" font-size="10" fill="#1A1A1A" text-anchor="middle" font-weight="500">Lip Balm</text>
+    <text x="40" y="170" font-family="'Outfit', sans-serif" font-size="11" fill="#FF5FA2" text-anchor="middle" font-weight="700">5 DH</text>
+  </g>
+
+  <!-- 6. Khôl Stick -->
+  <g transform="translate(940, 190)">
+    <rect x="28" y="15" width="24" height="110" rx="8" fill="#6B7280"/>
+    <rect x="28" y="15" width="8" height="110" rx="6" fill="white" opacity="0.15"/>
+    <!-- Cap -->
+    <rect x="25" y="0" width="30" height="20" rx="8" fill="#374151"/>
+    <!-- Gold accent -->
+    <rect x="28" y="60" width="24" height="2" fill="#D4AF37" opacity="0.4"/>
+    <text x="40" y="80" font-family="'Outfit', sans-serif" font-size="3" fill="#D4AF37" text-anchor="middle" opacity="0.6">KHÔL</text>
+    <ellipse cx="40" cy="130" rx="15" ry="4" fill="#1A1A1A" opacity="0.06"/>
+    <text x="40" y="162" font-family="'DM Sans', sans-serif" font-size="10" fill="#1A1A1A" text-anchor="middle" font-weight="500">Khôl Beldi</text>
+    <text x="40" y="177" font-family="'Outfit', sans-serif" font-size="11" fill="#FF5FA2" text-anchor="middle" font-weight="700">5 DH</text>
+  </g>
+
+  <!-- Brand watermark -->
+  <text x="600" y="580" font-family="'Outfit', sans-serif" font-weight="700" font-size="12" letter-spacing="3" fill="#FFCFE1" text-anchor="middle">ASRAR LALLA — LA BEAUTÉ MAROCAINE, RÉINVENTÉE</text>
+</svg>

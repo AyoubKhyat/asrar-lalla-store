@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 560" fill="none">
+  <!-- Influencer Insert Card — A6 size (105mm × 148mm) -->
+  <!-- Included in PR packages only -->
+  <!-- Print: 300dpi, 350gsm silk card stock -->
+
+  <rect width="400" height="560" rx="16" fill="white"/>
+  <rect width="400" height="560" rx="16" fill="none" stroke="#FFCFE1" stroke-width="1"/>
+
+  <!-- Top gradient -->
+  <defs>
+    <linearGradient id="insGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF5FA2"/>
+      <stop offset="100%" stop-color="#FF85B8"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="400" height="6" rx="3" fill="url(#insGrad)"/>
+
+  <!-- Logo -->
+  <text x="200" y="45" font-family="'Outfit', sans-serif" font-weight="700" font-size="14" letter-spacing="3" fill="#FF5FA2" text-anchor="middle">ASRAR LALLA</text>
+
+  <!-- Greeting -->
+  <text x="200" y="85" font-family="'Outfit', sans-serif" font-weight="800" font-size="24" fill="#1A1A1A" text-anchor="middle">Salam belle 🌸</text>
+
+  <!-- Body text -->
+  <text x="40" y="120" font-family="'DM Sans', sans-serif" font-size="11" fill="#6B6B6B" line-height="1.7">
+    <tspan x="40" dy="0">Merci d'avoir accepté de découvrir</tspan>
+    <tspan x="40" dy="18">nos produits ! Voici votre kit exclusif</tspan>
+    <tspan x="40" dy="18">ASRAR LALLA, préparé avec amour.</tspan>
+  </text>
+
+  <line x1="40" y1="180" x2="360" y2="180" stroke="#FFEAF3" stroke-width="1"/>
+
+  <!-- What's inside -->
+  <text x="40" y="208" font-family="'Outfit', sans-serif" font-weight="700" font-size="12" fill="#FF5FA2">CE QUE CONTIENT VOTRE KIT :</text>
+
+  <text x="40" y="232" font-family="'DM Sans', sans-serif" font-size="10" fill="#6B6B6B">
+    <tspan x="40" dy="0">🌹 Eau de Rose Distillée (100ml)</tspan>
+    <tspan x="40" dy="16">🧴 Crème de Rose Grand Format (100ml)</tspan>
+    <tspan x="40" dy="16">🫧 Savon Beldi Naturel (200g)</tspan>
+    <tspan x="40" dy="16">💧 Huile de Beauté Naturelle (30ml)</tspan>
+    <tspan x="40" dy="16">👁️ Khôl Traditionnel</tspan>
+    <tspan x="40" dy="16">💋 Baume à Lèvres Glowy</tspan>
+    <tspan x="40" dy="16">💆‍♀️ Shampooing aux Herbes (250ml)</tspan>
+  </text>
+
+  <line x1="40" y1="360" x2="360" y2="360" stroke="#FFEAF3" stroke-width="1"/>
+
+  <!-- Collab info -->
+  <text x="40" y="388" font-family="'Outfit', sans-serif" font-weight="700" font-size="12" fill="#FF5FA2">VOTRE CODE EXCLUSIF :</text>
+
+  <rect x="40" y="400" width="320" height="44" rx="22" fill="#FFEAF3"/>
+  <text x="200" y="428" font-family="'Outfit', sans-serif" font-weight="800" font-size="20" fill="#FF5FA2" text-anchor="middle">[VOTRE_PRENOM]15</text>
+
+  <text x="40" y="466" font-family="'DM Sans', sans-serif" font-size="9" fill="#6B6B6B">
+    <tspan x="40" dy="0">→ -15% pour votre communauté</tspan>
+    <tspan x="40" dy="15">→ Valable 30 jours, utilisations illimitées</tspan>
+    <tspan x="40" dy="15">→ Vous recevez 10% de chaque vente</tspan>
+  </text>
+
+  <line x1="40" y1="510" x2="360" y2="510" stroke="#FFEAF3" stroke-width="1"/>
+
+  <!-- Contact -->
+  <text x="200" y="535" font-family="'DM Sans', sans-serif" font-size="8" fill="#9CA3AF" text-anchor="middle">💬 WhatsApp : +212 6 00 00 00 00 · 📸 @asrarlalla</text>
+  <text x="200" y="550" font-family="'DM Sans', sans-serif" font-size="7" fill="#9CA3AF" text-anchor="middle">asrarlalla.ma</text>
+</svg>

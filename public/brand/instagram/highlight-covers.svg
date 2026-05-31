@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 200" fill="none">
+  <!-- Instagram Highlight Covers — 6 covers, 150×150 each -->
+  <!-- Export each group as individual 1080×1080 PNG -->
+
+  <!-- 1. PRODUITS -->
+  <g transform="translate(10, 25)">
+    <circle cx="75" cy="75" r="75" fill="#FFEAF3"/>
+    <text x="75" y="65" font-size="36" text-anchor="middle">🧴</text>
+    <text x="75" y="90" font-family="'Outfit', sans-serif" font-weight="700" font-size="9" fill="#FF5FA2" text-anchor="middle">PRODUITS</text>
+  </g>
+
+  <!-- 2. ROUTINES -->
+  <g transform="translate(170, 25)">
+    <circle cx="75" cy="75" r="75" fill="#FFEAF3"/>
+    <text x="75" y="65" font-size="36" text-anchor="middle">✨</text>
+    <text x="75" y="90" font-family="'Outfit', sans-serif" font-weight="700" font-size="9" fill="#FF5FA2" text-anchor="middle">ROUTINES</text>
+  </g>
+
+  <!-- 3. AVIS -->
+  <g transform="translate(330, 25)">
+    <circle cx="75" cy="75" r="75" fill="#FFEAF3"/>
+    <text x="75" y="65" font-size="36" text-anchor="middle">💬</text>
+    <text x="75" y="90" font-family="'Outfit', sans-serif" font-weight="700" font-size="9" fill="#FF5FA2" text-anchor="middle">AVIS</text>
+  </g>
+
+  <!-- 4. COMMANDES -->
+  <g transform="translate(490, 25)">
+    <circle cx="75" cy="75" r="75" fill="#FFEAF3"/>
+    <text x="75" y="65" font-size="36" text-anchor="middle">📦</text>
+    <text x="75" y="90" font-family="'Outfit', sans-serif" font-weight="700" font-size="9" fill="#FF5FA2" text-anchor="middle">COMMANDES</text>
+  </g>
+
+  <!-- 5. TIPS -->
+  <g transform="translate(650, 25)">
+    <circle cx="75" cy="75" r="75" fill="#FFEAF3"/>
+    <text x="75" y="65" font-size="36" text-anchor="middle">💡</text>
+    <text x="75" y="90" font-family="'Outfit', sans-serif" font-weight="700" font-size="9" fill="#FF5FA2" text-anchor="middle">TIPS</text>
+  </g>
+
+  <!-- 6. PACKS -->
+  <g transform="translate(810, 25)">
+    <circle cx="75" cy="75" r="75" fill="#FFEAF3"/>
+    <text x="75" y="65" font-size="36" text-anchor="middle">🎁</text>
+    <text x="75" y="90" font-family="'Outfit', sans-serif" font-weight="700" font-size="9" fill="#FF5FA2" text-anchor="middle">PACKS</text>
+  </g>
+</svg>
